@@ -1,0 +1,17 @@
+Introduction
+
+# Making an introscreen (introduction)
+def show_info(txt):
+    msg=visual.TextStim(win,txt)
+    msg.draw()
+    win.flip()
+    # add an escape key 
+    key=event.waitKeys()
+    if key[0] in ['escape']:
+        win.close()
+        core.quit(win)
+        
+# Define text info 
+show_info("""Thank you for participating in our experiment. 
+Throughout the experiment you will be presented with a number of sounds, which we would like you to rate on a scale from 1 to 10, 1 being sad and 10 being happy.
+add text here, add ethcics?""") 
