@@ -16,7 +16,7 @@ import cv2, sys, winsound
 #   Age
 #   So on
 
-popup = gui.Dlg(title = "Sound Exp")
+popup = gui.Dlg(title = "Sound Experiment")
 popup.addField("Gender:", choices = ["Male","Female"])
 popup.addField("Age: ")
 popup.addField("Musical Experience:", choices = ["Yes","No"])
