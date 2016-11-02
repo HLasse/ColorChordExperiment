@@ -6,7 +6,7 @@ Output of experiment:
 [id, age, gender, musician, color, rating, condition, 
 
 
-#load libraries
+(#load libraries)
 
 from psychopy import visual, gui, core, event, data
 import cv2, sys, winsound
