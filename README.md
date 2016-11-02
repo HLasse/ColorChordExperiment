@@ -32,6 +32,16 @@ if popup.OK:
     Musical_Exp = popup.data[3]
 else:
     core.quit()
+    
+win = visual.Window((fullscr=True), rgb=(255,255,0))
+
+    
+#def show_info(txt):
+    txtstm = visual.TextStim(win, text=txt) 
+    txtstm.draw()
+    win.flip()
+    event.waitKeys()
+    if key[0] in ['escape']: core.quit()
 
 
 
