@@ -10,6 +10,7 @@ Output of experiment:
 
 from psychopy import visual, gui, core, event, data
 import cv2, sys, winsound
+from random import sample
 
 #Make popup 
 #   Gender
@@ -17,6 +18,7 @@ import cv2, sys, winsound
 #   So on
 
 popup = gui.Dlg(title = "Sound Experiment")
+popup.addField("ID: "
 popup.addField("Gender:", choices = ["Male","Female"])
 popup.addField("Age: ")
 popup.addField("Musical Experience:", choices = ["Yes","No"])
@@ -24,9 +26,10 @@ popup.addField("Musical Experience:", choices = ["Yes","No"])
 popup.show()
 
 if popup.OK:
-    Gender = popup.data[0]
-    Age = popup.data[1]
-    Musical_Exp = popup.data[2]
+    ID = popup.data[0]
+    Gender = popup.data[1]
+    Age = popup.data[2]
+    Musical_Exp = popup.data[3]
 else:
     core.quit()
 
