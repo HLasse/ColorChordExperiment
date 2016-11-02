@@ -12,10 +12,10 @@ from psychopy import visual, gui, core, event, data
 import cv2, sys, winsound
 from random import sample
 
-#Make popup 
-#   Gender
-#   Age
-#   So on
+(#Make popup) 
+(#   Gender)
+(#   Age)
+(#   So on)
 
 popup = gui.Dlg(title = "Sound Experiment")
 popup.addField("ID: "
@@ -35,12 +35,12 @@ else:
 
 
 
-#Instructions
+(#Instructions)
 
 
-#Start Loop
-#   play sound
-#   get response
+(#Start Loop)
+(#   play sound)
+(#   get response)
 
 
 
