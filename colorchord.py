@@ -25,7 +25,7 @@ else:
 
 # defining variables
 trial_list = []
-audio_stim = glob.glob('\ExperimentStims\*.wav')
+audio_stim = glob.glob('C:\Users\Mads\Google Drev\Documents\AU\ExperimentStims\*.wav')
 condition = []
 
 # setting conditions and defining windows
@@ -67,7 +67,8 @@ for i, trial in enumerate(trial_list):
 msg = visual.TextStim(win, text = """Test text!""", color = "Black")
 msg.draw()
 win.flip()
-next = event.waitKeys()
+key = event.waitKeys()
+if key[0] in ['escape']:core.quit()
 
 
 # creating rating scale
@@ -90,24 +91,26 @@ for trial in trial_list:
         answer = rating_scale.getRating()
         trial['rating'] = answer
         rating_scale.reset()
-
     elif trial['condition'] == 'sad':
         stim = sound.Sound(trial['stim'])
         stim.play()
         while rating_scale.noResponse:
             rating_scale.draw()
             win.flip()
-            answer = rating_scale.getRating()
-            trial['rating'] = answer
+        answer = rating_scale.getRating()
+        trial['rating'] = answer
+        rating_scale.reset()
     else:
         stim = sound.Sound(trial['stim'])
         stim.play()
         while rating_scale.noResponse:
             rating_scale.draw()
             win.flip()
-            answer = rating_scale.getRating()
-            trial['rating'] = answer
+        answer = rating_scale.getRating()
+        trial['rating'] = answer
+        rating_scale.reset()
     writer.write(trial)
+    if key[0] in ['escape']:core.quit()
 
 win.close()
 
