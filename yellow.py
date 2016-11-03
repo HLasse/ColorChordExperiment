@@ -15,7 +15,7 @@ popup.addField("Do you play music?" , choices = ["No", "Yes"])
 popup.show()
 #save participant data to variables if ok is clicked, else quit
 if popup.OK:
-    id = popup.data[0]
+    ID = popup.data[0]
     age = popup.data[1]
     day = int(popup.data[2])
     gender = popup.data[3]
@@ -25,7 +25,7 @@ else:
 
 # defining variables
 trial_list = []
-audio_stim = ("cat_meow_x.waw")
+audio_stim = ["cat_meow_x.wav", "chicken_bock_x.wav"]
 condition = []
 
 # setting conditions
@@ -39,12 +39,13 @@ else:
 # preparing list of trials
 for stim in audio_stim:
     trial_list += [{
-    'ID' : id,
+    'ID' : ID,
     'Age' : age,
     'Gender' : gender,
     'day born' : day,
     'musician' : musician,
     'condition' : condition,
+    'stim': stim,
     'rating' : ''
     }]
 
@@ -79,21 +80,34 @@ labels = ['1','5','10'],
 textColor = "Black", lineColor = "Black")
 
 # creating writer
-
+writer = ppc.csvWriter(ID, saveFolder='data', headerTrial=trial_list[0])
 
 # loop through trials
 for trial in trial_list:
     if trial['condition'] == 'happy':
+        stim = sound.Sound(trial['stim'])
+        stim.play()
         while rating_scale.noResponse:
-            stim = sound.Sound(audio_stim)
-            stim.play() 
             rating_scale.draw()
             win.flip()
+        answer = rating_scale.getRating()
+        trial['rating'] = answer
     elif trial['condition'] == 'sad':
+        stim = sound.Sound(trial['stim'])
+        stim.play()
         while rating_scale.noResponse:
             rating_scale.draw()
             win.flip()
+        answer = rating_scale.getRating()
+        trial['rating'] = answer
     else:
+        stim = sound.Sound(trial['stim'])
+        stim.play()
         while rating_scale.noResponse:
             rating_scale.draw()
             win.flip()
+        answer = rating_scale.getRating()
+        trial['rating'] = answer
+    writer.write(trial)
+win.close()
+core.quit()
