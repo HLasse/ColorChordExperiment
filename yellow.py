@@ -82,6 +82,7 @@ textColor = "Black", lineColor = "Black")
 # creating writer
 writer = ppc.csvWriter(ID, saveFolder='data', headerTrial=trial_list[0])
 
+print trial_list
 # loop through trials
 for trial in trial_list:
     if trial['condition'] == 'happy':
@@ -92,22 +93,23 @@ for trial in trial_list:
             win.flip()
         answer = rating_scale.getRating()
         trial['rating'] = answer
+        rating_scale.reset()
     elif trial['condition'] == 'sad':
         stim = sound.Sound(trial['stim'])
         stim.play()
         while rating_scale.noResponse:
             rating_scale.draw()
             win.flip()
-        answer = rating_scale.getRating()
-        trial['rating'] = answer
+            answer = rating_scale.getRating()
+            trial['rating'] = answer
     else:
         stim = sound.Sound(trial['stim'])
         stim.play()
         while rating_scale.noResponse:
             rating_scale.draw()
             win.flip()
-        answer = rating_scale.getRating()
-        trial['rating'] = answer
+            answer = rating_scale.getRating()
+            trial['rating'] = answer
     writer.write(trial)
 win.close()
 core.quit()
