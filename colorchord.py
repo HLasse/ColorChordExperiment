@@ -64,7 +64,10 @@ for i, trial in enumerate(trial_list):
 
 
 # intro screen
-msg = visual.TextStim(win, text = """Test text!""", color = "Black")
+msg = visual.TextStim(win, text = """Thank you for participating in our experiment.\n 
+Throughout the experiment you will be presented with a number of sounds, which we would like you to rate on a scale from 1 to 10,
+1 being very sad and 10 being very happy.\n Feel free to ask the experimenter any questions you might have.\n 
+The experiment will take approximately 3 minutes.""", color = "Grey")
 msg.draw()
 win.flip()
 key = event.waitKeys()
