@@ -29,16 +29,14 @@ audio_stim = glob.glob('ExperimentStims\*.wav')
 condition = []
 
 # setting conditions and defining windows
-if day < 10:
+if day < 15:
     condition = 'happy'
     win = visual.Window(fullscr = True, color = 'Yellow')
-elif day < 20:
+else:
     condition = 'sad'
     win = visual.Window(fullscr = True, color = 'MightnightBlue')
-else:
-    condition = 'neutral'
-    win = visual.Window(fullscr = True, color = 'White')
-    
+
+
 # preparing list of trials
 for stim in audio_stim:
     trial_list += [{
@@ -96,16 +94,7 @@ for trial in trial_list:
         answer = rating_scale.getRating()
         trial['rating'] = answer
         rating_scale.reset()
-    elif trial['condition'] == 'sad':
-        stim = sound.Sound(trial['stim'])
-        stim.play()
-        while rating_scale.noResponse:
-            rating_scale.draw()
-            win.flip()
-        answer = rating_scale.getRating()
-        trial['rating'] = answer
-        rating_scale.reset()
-    else:
+    else trial['condition'] == 'sad':
         stim = sound.Sound(trial['stim'])
         stim.play()
         while rating_scale.noResponse:
