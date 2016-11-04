@@ -78,7 +78,7 @@ if key[0] in ['escape']:core.quit()
 rating_scale = visual.RatingScale(win, markerColor = "White", 
 scale = "Very Sad         ...         Very Happy", low =  1, high = 10,
 labels = ['1','5','10'],
-textColor = "Black", lineColor = "Black")
+textColor = "Grey", lineColor = "Grey")
 
 # creating writer
 writer = ppc.csvWriter(ID, saveFolder='data', headerTrial=trial_list[0])
