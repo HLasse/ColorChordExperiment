@@ -31,13 +31,13 @@ condition = []
 # setting conditions and defining windows
 if day < 10:
     condition = 'happy'
-    win = visual.Window(fullscr = True, rgb=(255,255,0))
+    win = visual.Window(fullscr = True, color = 'Yellow')
 elif day < 20:
     condition = 'sad'
-    win = visual.Window(fullscr = True, rgb=(20, 0, 146))
+    win = visual.Window(fullscr = True, color = 'MightnightBlue')
 else:
     condition = 'neutral'
-    win = visual.Window(fullscr = True)
+    win = visual.Window(fullscr = True, color = 'White')
     
 # preparing list of trials
 for stim in audio_stim:
