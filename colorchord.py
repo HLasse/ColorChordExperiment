@@ -25,7 +25,7 @@ else:
 
 # defining variables
 trial_list = []
-audio_stim = glob.glob('C:\Users\Mads\Google Drev\Documents\AU\ExperimentStims\*.wav')
+audio_stim = glob.glob('ExperimentStims\*.wav')
 condition = []
 
 # setting conditions and defining windows
@@ -80,6 +80,8 @@ textColor = "Black", lineColor = "Black")
 # creating writer
 writer = ppc.csvWriter(ID, saveFolder='data', headerTrial=trial_list[0])
 
+print trial_list
+
 # loop through trials
 for trial in trial_list:
     if trial['condition'] == 'happy':
@@ -110,25 +112,25 @@ for trial in trial_list:
         trial['rating'] = answer
         rating_scale.reset()
     writer.write(trial)
-    if key[0] in ['escape']:core.quit()
 
-win.close()
-
-win2 = visual.Window(fullscr = True, rgb =(255,255,0))
-msg2 = visual.TextStim(win2, text = """Please rate the background color""", color = "Black")
-msg2.draw()
-win2.flip()
-next = event.waitKeys()
-
-while rating_scale.noResponse:
-    rating_scale.draw()
-    win2.flip()
-    happyrating = rating_scale.getRating()
-    trial['happycolor'] = happyrating
-if key[0] in ['escape']:
-    core.quit()
-    
 win.close()
 core.quit()
+#
+#win2 = visual.Window(fullscr = True, rgb =(255,255,0))
+#msg2 = visual.TextStim(win2, text = """Please rate the background color""", color = "Black")
+#msg2.draw()
+#win2.flip()
+#next = event.waitKeys()
+#
+#while rating_scale.noResponse:
+#    rating_scale.draw()
+#    win2.flip()
+#    happyrating = rating_scale.getRating()
+#    trial['happycolor'] = happyrating
+#if key[0] in ['escape']:
+#    core.quit()
+#    
+#win.close()
+#core.quit()
 
 
