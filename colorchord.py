@@ -31,10 +31,10 @@ condition = []
 # setting conditions and defining windows
 if day < 15:
     condition = 'happy'
-    win = visual.Window(fullscr = True, color = 'Yellow')
+    win = visual.Window(fullscr = False, color = 'Yellow')
 else:
     condition = 'sad'
-    win = visual.Window(fullscr = True, color = 'MightnightBlue')
+    win = visual.Window(fullscr = False, color = 'MidnightBlue')
 
 
 # preparing list of trials
@@ -49,8 +49,7 @@ for stim in audio_stim:
     'stim': stim,
     'rating' : '',
     'happycolor' : '',
-    'sadcolor' : '',
-    'neutralcolor' : ''
+    'sadcolor' : ''
     }]
 
 # randomizing order
@@ -73,36 +72,26 @@ if key[0] in ['escape']:core.quit()
 
 
 # creating rating scale
-rating_scale = visual.RatingScale(win, markerColor = "White", 
+rating_scale = visual.RatingScale(win, markerColor = "Grey", singleClick = True,
 scale = "Very Sad         ...         Very Happy", low =  1, high = 10,
-labels = ['1','5','10'],
 textColor = "Grey", lineColor = "Grey")
 
 # creating writer
 writer = ppc.csvWriter(ID, saveFolder='data', headerTrial=trial_list[0])
 
-print trial_list
-
 # loop through trials
 for trial in trial_list:
-    if trial['condition'] == 'happy':
-        stim = sound.Sound(trial['stim'])
-        stim.play()
-        while rating_scale.noResponse:
-            rating_scale.draw()
-            win.flip()
-        answer = rating_scale.getRating()
-        trial['rating'] = answer
-        rating_scale.reset()
-    else trial['condition'] == 'sad':
-        stim = sound.Sound(trial['stim'])
-        stim.play()
-        while rating_scale.noResponse:
-            rating_scale.draw()
-            win.flip()
-        answer = rating_scale.getRating()
-        trial['rating'] = answer
-        rating_scale.reset()
+    stim = sound.Sound(trial['stim'])
+    stim.play()
+    while rating_scale.noResponse:
+        rating_scale.draw()
+        win.flip()
+    answer = rating_scale.getRating()
+    trial['rating'] = answer
+    rating_scale.reset()
+    key = event.waitKeys()
+    if key[0] in ['escape']: 
+        core.quit()
     writer.write(trial)
 
 win.close()
@@ -124,5 +113,3 @@ core.quit()
 #    
 #win.close()
 #core.quit()
-
-
