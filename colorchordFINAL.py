@@ -92,13 +92,14 @@ for trial in trial_list:
     if key[0] in ['escape']: 
         core.quit()
 
-
+# creating new windows for rating of the sad and happy background
+# creating window for the sad background
 win2 = visual.Window(fullscr = True, color =  'MidnightBlue')
-msg2 = visual.TextStim(win2, text = """Please rate the background color""", color = "Grey")
+msg2 = visual.TextStim(win2, text = """Please rate the current background color on the same scale""", color = "Grey")
 msg2.draw()
 win2.flip()
 next = event.waitKeys()
-#
+
 # creating rating scale
 rating_scale = visual.RatingScale(win2, markerColor = "Grey", singleClick = True, 
 scale = "Very Sad         ...         Very Happy", low =  1, high = 10, # creating a scale from 1 - 10. 
@@ -116,10 +117,10 @@ if key[0] in ['escape']:
     core.quit()
 
 
-
+# creating window for the happy background
 
 win3 = visual.Window(fullscr = True, color =  'Yellow')
-msg3 = visual.TextStim(win3, text = """Please rate the background color""", color = "Grey")
+msg3 = visual.TextStim(win3, text = """Please rate the current background color on the same scale""", color = "Grey")
 msg3.draw()
 win3.flip()
 next = event.waitKeys()
@@ -137,12 +138,13 @@ key = event.waitKeys()
 if key[0] in ['escape']: 
     core.quit()
 
-
+# saving the results in file
 for trial in trial_list:
     trial['happycolor'] = happyrating
     trial['sadcolor'] = sadrating
     writer.write(trial)
     
+# creating escape window
 msg4 = visual.TextStim(win3, text = """That's it! Thanks for participating! Press 'escape' to exit""", color = 'Grey')
 msg4.draw()
 win3.flip()
