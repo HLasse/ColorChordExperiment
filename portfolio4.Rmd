@@ -1,0 +1,72 @@
+---
+title: "Portfolio4"
+output: html_document
+---
+
+```{r message = FALSE}
+setwd("C:/Portfolios/Portfolio4/data")
+library(ggplot2); library(pastecs)
+library(Hmisc); library(tidyr)
+```
+
+
+```{r }
+# Get the files names
+files = list.files(pattern="*.csv")
+# First apply read.csv, then rbind
+data = do.call(rbind, lapply(files, function(x) read.csv2(x, stringsAsFactors = FALSE)))
+
+
+# T test with all data points
+mean(data$rating[data$condition == 'sad'])
+mean(data$rating[data$condition == 'happy'])
+
+indtest = t.test(data$rating ~ data$condition, paired = F)
+indtest
+
+# T test with NA's removed
+data = na.omit(data)
+
+
+mean(data$rating[data$condition == 'sad'])
+mean(data$rating[data$condition == 'happy'])
+
+mean(data$sadcolor[data$condition == 'sad'])
+mean(data$happycolor[data$condition == 'happy'])
+
+indtest = t.test(data$rating ~ data$condition, paired = F)
+indtest
+
+#calculating effect size
+efsize = function(x) {
+  sqrt((x$statistic[[1]]^2)/(x$statistic[[1]]^2+x$parameter[[1]]))
+}
+efsize(indtest)
+
+```
+
+``` {r}
+data = spread(data, condition, rating)
+
+
+ggplot(data, aes(happy)) + 
+  geom_histogram(aes(y = ..density..), fill = "white", color = "black", binwidth=0.2) +
+  stat_function(fun =dnorm, args =list(mean = mean(data$happy, na.rm =T), sd = sd(data$happy, na.rm=T)), color ="blue", size=1) +
+  labs(title = "happy")
+
+ggplot(data, aes(sad)) + 
+  geom_histogram(aes(y = ..density..), fill = "white", color = "black", binwidth=0.2) +
+  stat_function(fun =dnorm, args =list(mean = mean(data$sad, na.rm =T), sd = sd(data$sad, na.rm=T)), color ="blue", size=1) +
+  labs(title = "sad")
+
+#Creating Q-Q-plot
+qplot(sample = data$sad) +
+  labs(title = "happy")
+qplot(sample = data$happy) + 
+  labs(title = 'sad')
+
+#Getting descriptive statistics
+stat.desc(data$sad, F, norm=T)
+stat.desc(data$happy, F, norm=T)
+
+```
